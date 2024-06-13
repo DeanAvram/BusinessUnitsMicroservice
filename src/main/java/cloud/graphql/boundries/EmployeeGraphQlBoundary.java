@@ -1,13 +1,13 @@
-package boundries;
+package cloud.graphql.boundries;
 
 import java.util.Set;
 
-public class EmployeeBoundary {
+public class EmployeeGraphQlBoundary {
 
     private String email;
     private Set<UnitBoundary> units;
 
-    public EmployeeBoundary() {
+    public EmployeeGraphQlBoundary() {
     }
 
     public String getEmail() {

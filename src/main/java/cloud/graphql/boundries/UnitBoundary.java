@@ -1,4 +1,4 @@
-package boundries;
+package cloud.graphql.boundries;
 
 
 public class UnitBoundary {
