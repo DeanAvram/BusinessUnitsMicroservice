@@ -1,0 +1,21 @@
+type Query {
+    getUnitById (id:ID):UnitGraphQlBoundary
+    getEmployeeByEmail (email:String):EmployeeGraphQlBoundary
+    getUnits (page:Int, size:Int):[UnitGraphQlBoundary]
+}
+
+type UnitGraphQlBoundary{
+    id:ID
+    name:String
+    createdTimestamp:String
+    manager: EmployeeGraphQlBoundary
+    employees(page:Int, size:Int):[EmployeeGraphQlBoundary]
+    subUnits(page:Int, size:Int):[UnitGraphQlBoundary]
+    parentUnit: UnitGraphQlBoundary
+}
+
+type EmployeeGraphQlBoundary{
+    email:String
+    units: UnitGraphQlBoundary
+    manages: UnitGraphQlBoundary
+}
