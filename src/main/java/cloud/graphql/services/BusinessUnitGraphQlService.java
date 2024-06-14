@@ -13,5 +13,5 @@ public interface BusinessUnitGraphQlService {
     public Mono<UnitGraphQlBoundary> getSpecificUnit(String id);
     public Mono<EmployeeGraphQlBoundary> getSpecifEmployee(String email);
 
-    public Flux<UnitGraphQlBoundary> getUnits(String id, int page, int size);
+    public Flux<UnitGraphQlBoundary> getAllUnits(int page, int size);
 }

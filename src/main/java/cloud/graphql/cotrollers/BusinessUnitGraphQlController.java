@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.text.SimpleDateFormat;
 
 @Controller
 public class BusinessUnitGraphQlController {
@@ -37,12 +36,11 @@ public class BusinessUnitGraphQlController {
     }
 
     @SchemaMapping
-    public Flux<UnitGraphQlBoundary> getUnits(
-            UnitGraphQlBoundary unit,
+    public Flux<UnitGraphQlBoundary> getAllUnits(
             @Argument int page,
             @Argument int size){
         return this.businessUnitGraphQlService
-                .getUnits(unit.getId(),page,size);
+                .getAllUnits(page,size);
 
 
     }

@@ -28,7 +28,7 @@ public class BusinessUnitGraphQlServiceImplementation implements BusinessUnitGra
     }
 
     @Override
-    public Flux<UnitGraphQlBoundary> getUnits(String id, int page, int size) {
+    public Flux<UnitGraphQlBoundary> getAllUnits(int page, int size) {
         return null;
     }
 
