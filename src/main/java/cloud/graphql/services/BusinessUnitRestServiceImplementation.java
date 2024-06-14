@@ -62,7 +62,7 @@ public class BusinessUnitRestServiceImplementation implements BusinessUnitRestSe
         rv.setManager(unitEntity.getManager());
         rv.setCreationDate(unitEntity.getCreationDate());
         rv.setParentUnit(unitEntity.getParentUnit());
-
+        rv.setEmployees(unitEntity.getEmployees());
         return rv;
     }
 
@@ -73,7 +73,7 @@ public class BusinessUnitRestServiceImplementation implements BusinessUnitRestSe
         rv.setManager(unitBoundary.getManager());
         rv.setCreationDate(unitBoundary.getCreationDate());
         rv.setParentUnit(unitBoundary.getParentUnit());
-
+        rv.setEmployees(unitBoundary.getEmployees());
         return rv;
     }
 

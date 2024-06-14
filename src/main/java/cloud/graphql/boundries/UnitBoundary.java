@@ -10,7 +10,7 @@ public class UnitBoundary {
     private String creationDate;
     private String manager;
     private String parentUnit;
-    private Set<EmployeeBoundary> employees;
+    private Set<String> employees;
 
     public UnitBoundary() {
     }
@@ -61,11 +61,11 @@ public class UnitBoundary {
         this.parentUnit = parentUnit;
     }
 
-    public Set<EmployeeBoundary> getEmployees() {
+    public Set<String> getEmployees() {
         return employees;
     }
 
-    public void setEmployees(Set<EmployeeBoundary> employees) {
+    public void setEmployees(Set<String> employees) {
         this.employees = employees;
     }
 
