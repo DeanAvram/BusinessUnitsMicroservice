@@ -1,5 +1,6 @@
 package cloud.graphql.services;
 
+import cloud.graphql.boundries.EmployeeBoundary;
 import cloud.graphql.boundries.UnitBoundary;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -18,6 +19,6 @@ public class BusinessUnitInitializer implements CommandLineRunner {
         //check if org is exist and create if not
         //this.businessUnitRestService.getOrgById("org")
         //        .switchIfEmpty(this.businessUnitRestService.createOrg(null, new UnitBoundary("org", "org", "ceo@demo.org")));
-        this.businessUnitRestService.createOrg(new UnitBoundary("org", "org", "ceo@demo.org")).block();
+        this.businessUnitRestService.createOrg(new UnitBoundary("org", "org",  new EmployeeBoundary())).block();
     }
 }

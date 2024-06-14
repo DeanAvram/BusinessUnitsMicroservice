@@ -1,5 +1,6 @@
 package cloud.graphql.entites;
 
+import cloud.graphql.boundries.EmployeeBoundary;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -9,7 +10,7 @@ public class UnitEntity {
     @Id private String id;
     private String type;
     private String creationDate;
-    private String manager;
+    private EmployeeBoundary manager;
 
     public UnitEntity() {
     }
@@ -38,11 +39,11 @@ public class UnitEntity {
         this.creationDate = creationDate;
     }
 
-    public String getManager() {
+    public EmployeeBoundary getManager() {
         return manager;
     }
 
-    public void setManager(String manager) {
+    public void setManager(EmployeeBoundary manager) {
         this.manager = manager;
     }
 }

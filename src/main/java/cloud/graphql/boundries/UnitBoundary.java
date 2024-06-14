@@ -1,21 +1,19 @@
 package cloud.graphql.boundries;
 
 
-import java.util.Set;
-
 public class UnitBoundary {
 
     private String id;
     private String type;
     private String creationDate;
-    private String manager;
-    //private UnitBoundary parentUnit;
+    private EmployeeBoundary manager;
+    private UnitBoundary parentUnit;
     //private Set<EmployeeBoundary> employees;
 
     public UnitBoundary() {
     }
 
-    public UnitBoundary(String id, String type, String manager){
+    public UnitBoundary(String id, String type, EmployeeBoundary manager){
         this.id = id;
         this.type = type;
         this.manager = manager;
@@ -45,22 +43,22 @@ public class UnitBoundary {
         this.creationDate = creationDate;
     }
 
-    public String getManager() {
+    public EmployeeBoundary getManager() {
         return manager;
     }
 
-    public void setManager(String manager) {
+    public void setManager(EmployeeBoundary manager) {
         this.manager = manager;
     }
 
-    /*public UnitBoundary getParentUnit() {
+  public UnitBoundary getParentUnit() {
         return parentUnit;
     }
 
     public void setParentUnit(UnitBoundary parentUnit) {
         this.parentUnit = parentUnit;
     }
-
+  /*
     public Set<EmployeeBoundary> getEmployees() {
         return employees;
     }

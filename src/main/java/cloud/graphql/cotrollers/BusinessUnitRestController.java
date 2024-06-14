@@ -25,6 +25,17 @@ public class BusinessUnitRestController {
         return this.businessUnitService.gelAll();
     }
 
+    @PostMapping(
+            path={"/{parentUnitId}"},
+            produces = {MediaType.APPLICATION_JSON_VALUE},
+            consumes = {MediaType.APPLICATION_JSON_VALUE})
+    public Mono<UnitBoundary> create(
+            @RequestBody UnitBoundary unitBoundary,
+            @PathVariable String parentUnitId){
+        return BusinessUnitRestService.create(unitBoundary, parentUnitId);
+    }
+
+
     @DeleteMapping
     public Mono<Void> deleteAllUnits(){
         return this.businessUnitService.cleanup();

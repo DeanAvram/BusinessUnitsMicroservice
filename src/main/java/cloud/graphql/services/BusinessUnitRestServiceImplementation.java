@@ -1,5 +1,6 @@
 package cloud.graphql.services;
 
+import cloud.graphql.boundries.EmployeeBoundary;
 import cloud.graphql.boundries.UnitBoundary;
 import cloud.graphql.entites.UnitEntity;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,11 @@ public class BusinessUnitRestServiceImplementation implements BusinessUnitRestSe
 
     public BusinessUnitRestServiceImplementation(BusinessUnitCrud units) {
         this.units = units;
+    }
+
+    @Override
+    public Mono<UnitBoundary> create(UnitBoundary unitBoundary, String parentUnitId) {
+        return null;
     }
 
     @Override
@@ -47,6 +53,21 @@ public class BusinessUnitRestServiceImplementation implements BusinessUnitRestSe
     public Mono<UnitBoundary> getOrgById(String id) {
         return units.findById(id)
                 .map(this::toBoundary);
+    }
+
+    @Override
+    public Mono<UnitBoundary> getSpecificUnit(String id) {
+        return null;
+    }
+
+    @Override
+    public Mono<EmployeeBoundary> getSpecifEmployee(String email) {
+        return null;
+    }
+
+    @Override
+    public Flux<UnitBoundary> getUnits(String id, int page, int size) {
+        return null;
     }
 
     private UnitBoundary toBoundary(UnitEntity unitEntity) {
