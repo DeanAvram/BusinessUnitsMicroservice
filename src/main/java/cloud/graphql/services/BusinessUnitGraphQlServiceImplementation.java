@@ -34,8 +34,8 @@ public class BusinessUnitGraphQlServiceImplementation implements BusinessUnitGra
 
     private EmployeeGraphQlBoundary toEmployeeGraphQlyBoundary(EmployeeBoundary employeeBoundary) {
         EmployeeGraphQlBoundary rv = new EmployeeGraphQlBoundary();
-        rv.setEmail(employeeBoundary.getEmail());
-        rv.setUnits(employeeBoundary.getUnits());
+        //rv.setEmail(employeeBoundary.getEmail());
+        //rv.setUnits(employeeBoundary.getUnits());
         return rv;
     }
 
@@ -43,7 +43,7 @@ public class BusinessUnitGraphQlServiceImplementation implements BusinessUnitGra
     private UnitGraphQlBoundary toGraphBoundary(UnitBoundary unitBoundary) {
         UnitGraphQlBoundary rv = new UnitGraphQlBoundary();
         rv.setId(unitBoundary.getId());
-        rv.setManager(unitBoundary.getManager());
+        //rv.setManager(unitBoundary.getManager());
         rv.setType(unitBoundary.getType());
         //rv.setParentUnit(unitBoundary.getParentUnit);
         //rv.setCreationDate(this.formatter.format(unitBoundary.getCreationDate()));

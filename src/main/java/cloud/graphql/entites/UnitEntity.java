@@ -4,13 +4,18 @@ import cloud.graphql.boundries.EmployeeBoundary;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Set;
+
 @Document(collection = "BUSINESS_UNIT")
 public class UnitEntity {
 
-    @Id private String id;
+    @Id
+    private String id;
     private String type;
     private String creationDate;
-    private EmployeeBoundary manager;
+    private String manager;
+    private String parentUnit;
+    private Set<EmployeeBoundary> employees;
 
     public UnitEntity() {
     }
@@ -39,11 +44,27 @@ public class UnitEntity {
         this.creationDate = creationDate;
     }
 
-    public EmployeeBoundary getManager() {
+    public String getManager() {
         return manager;
     }
 
-    public void setManager(EmployeeBoundary manager) {
+    public void setManager(String manager) {
         this.manager = manager;
+    }
+
+    public String getParentUnit() {
+        return parentUnit;
+    }
+
+    public void setParentUnit(String parentUnit) {
+        this.parentUnit = parentUnit;
+    }
+
+    public Set<EmployeeBoundary> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(Set<EmployeeBoundary> employees) {
+        this.employees = employees;
     }
 }

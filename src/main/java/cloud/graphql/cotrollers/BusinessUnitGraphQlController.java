@@ -35,7 +35,7 @@ public class BusinessUnitGraphQlController {
 
     }
 
-    @SchemaMapping
+    /*@SchemaMapping
     public Flux<UnitGraphQlBoundary> getAllUnits(
             @Argument int page,
             @Argument int size){
@@ -43,7 +43,7 @@ public class BusinessUnitGraphQlController {
                 .getAllUnits(page,size);
 
 
-    }
+    }*/
 
 
 

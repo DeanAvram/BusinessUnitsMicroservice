@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @Service
-public class BusinessUnitRestServiceImplementation implements BusinessUnitRestService{
+public class BusinessUnitRestServiceImplementation implements BusinessUnitRestService {
 
     private BusinessUnitCrud units;
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -22,10 +22,18 @@ public class BusinessUnitRestServiceImplementation implements BusinessUnitRestSe
     }
 
 
-    @Override
     public Mono<UnitBoundary> createOrg(UnitBoundary unitBoundary, String parentUnitId) {
-        return Mono.just(unitBoundary)
-                .map(this::toEntity)
+        unitBoundary.setCreationDate(formatter.format(LocalDate.now()));
+
+        Mono<UnitEntity> entityMono = (parentUnitId == null || parentUnitId.isEmpty())
+                ? Mono.just(unitBoundary).map(this::toEntity)
+                : this.units.findById(parentUnitId)
+                .map(parentUnit -> {
+                    unitBoundary.setParentUnit(parentUnit.getId());
+                    return this.toEntity(unitBoundary);
+                });
+
+        return entityMono
                 .flatMap(this.units::save)
                 .map(this::toBoundary);
     }
@@ -33,10 +41,10 @@ public class BusinessUnitRestServiceImplementation implements BusinessUnitRestSe
 
     @Override
     public Mono<Void> cleanup() {
-        /*return units.findByIdNot("org")
+        return units.findByIdNot("org")
                 .flatMap(units::delete)
-                .then();*/
-        return units.deleteAll();
+                .then();
+        //return units.deleteAll();
     }
 
     @Override
@@ -53,17 +61,18 @@ public class BusinessUnitRestServiceImplementation implements BusinessUnitRestSe
         rv.setType(unitEntity.getType());
         rv.setManager(unitEntity.getManager());
         rv.setCreationDate(unitEntity.getCreationDate());
+        rv.setParentUnit(unitEntity.getParentUnit());
 
         return rv;
     }
 
     private UnitEntity toEntity(UnitBoundary unitBoundary) {
         UnitEntity rv = new UnitEntity();
-
         rv.setId(unitBoundary.getId());
         rv.setType(unitBoundary.getType());
         rv.setManager(unitBoundary.getManager());
-        rv.setCreationDate(formatter.format(LocalDate.now()));
+        rv.setCreationDate(unitBoundary.getCreationDate());
+        rv.setParentUnit(unitBoundary.getParentUnit());
 
         return rv;
     }
