@@ -21,13 +21,9 @@ public class BusinessUnitRestServiceImplementation implements BusinessUnitRestSe
         this.units = units;
     }
 
-    @Override
-    public Mono<UnitBoundary> create(UnitBoundary unitBoundary, String parentUnitId) {
-        return null;
-    }
 
     @Override
-    public Mono<UnitBoundary> createOrg(UnitBoundary unitBoundary) {
+    public Mono<UnitBoundary> createOrg(UnitBoundary unitBoundary, String parentUnitId) {
         return Mono.just(unitBoundary)
                 .map(this::toEntity)
                 .flatMap(this.units::save)
@@ -49,26 +45,6 @@ public class BusinessUnitRestServiceImplementation implements BusinessUnitRestSe
                 .map(this::toBoundary);
     }
 
-    @Override
-    public Mono<UnitBoundary> getOrgById(String id) {
-        return units.findById(id)
-                .map(this::toBoundary);
-    }
-
-    @Override
-    public Mono<UnitBoundary> getSpecificUnit(String id) {
-        return null;
-    }
-
-    @Override
-    public Mono<EmployeeBoundary> getSpecifEmployee(String email) {
-        return null;
-    }
-
-    @Override
-    public Flux<UnitBoundary> getUnits(String id, int page, int size) {
-        return null;
-    }
 
     private UnitBoundary toBoundary(UnitEntity unitEntity) {
         UnitBoundary rv = new UnitBoundary();

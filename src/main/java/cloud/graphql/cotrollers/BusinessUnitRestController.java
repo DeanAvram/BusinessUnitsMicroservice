@@ -32,7 +32,7 @@ public class BusinessUnitRestController {
     public Mono<UnitBoundary> create(
             @RequestBody UnitBoundary unitBoundary,
             @PathVariable String parentUnitId){
-        return BusinessUnitRestService.create(unitBoundary, parentUnitId);
+        return this.businessUnitService.createOrg(unitBoundary, parentUnitId);
     }
 
 

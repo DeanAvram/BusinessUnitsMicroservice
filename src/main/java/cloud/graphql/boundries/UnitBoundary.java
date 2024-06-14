@@ -58,34 +58,5 @@ public class UnitBoundary {
     public void setParentUnit(UnitBoundary parentUnit) {
         this.parentUnit = parentUnit;
     }
-  /*
-    public Set<EmployeeBoundary> getEmployees() {
-        return employees;
-    }
 
-    public void setEmployees(Set<EmployeeBoundary> employees) {
-        this.employees = employees;
-    }
-
-    @Override
-    public String toString() {
-        return "UnitBoundary{" +
-                "id='" + id + '\'' +
-                ", type='" + type + '\'' +
-                ", creationDate='" + creationDate + '\'' +
-                ", manager='" + manager + '\'' +
-                ", parentUnit=" + parentUnit +
-                ", employees=" + employees +
-                '}';
-    }*/
-
-    @Override
-    public String toString() {
-        return "UnitBoundary{" +
-                "id='" + id + '\'' +
-                ", type='" + type + '\'' +
-                ", creationDate='" + creationDate + '\'' +
-                ", manager='" + manager + '\'' +
-                '}';
-    }
 }

@@ -4,7 +4,7 @@ import cloud.graphql.boundries.EmployeeBoundary;
 import cloud.graphql.boundries.EmployeeGraphQlBoundary;
 import cloud.graphql.boundries.UnitBoundary;
 import cloud.graphql.boundries.UnitGraphQlBoundary;
-import cloud.graphql.services.BusinessUnitRestService;
+import cloud.graphql.services.BusinessUnitGraphQlService;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
@@ -16,29 +16,29 @@ import java.text.SimpleDateFormat;
 
 @Controller
 public class BusinessUnitGraphQlController {
-    private BusinessUnitRestService businessUnitRestService;
+    private BusinessUnitGraphQlService businessUnitGraphQlService;
     private SimpleDateFormat formatter;
 
-    public BusinessUnitGraphQlController(BusinessUnitRestService businessUnitRestService) {
-        this.businessUnitRestService = businessUnitRestService;
+    public BusinessUnitGraphQlController(BusinessUnitGraphQlService businessUnitGraphQlService) {
+        this.businessUnitGraphQlService = businessUnitGraphQlService;
         this.formatter = new SimpleDateFormat("dd-MM-yyyy");
     }
 
     @QueryMapping
     public Mono<UnitGraphQlBoundary> getUnitById(
             @Argument String id){
-        return this.businessUnitRestService
+        return this.businessUnitGraphQlService
                 .getSpecificUnit(id)
-                .map(this::toGraphQlBoundray)
+                .map(this::toGraphBoundary)
                 .log();
     }
 
     @QueryMapping
     public Mono<EmployeeGraphQlBoundary> getEmployeeByEmail(
             @Argument String email){
-        return this.businessUnitRestService
+        return this.businessUnitGraphQlService
                 .getSpecifEmployee(email)
-                .map(this::toEmployeeGraphQlBoundray)
+                .map(this::toEmployeeGraphQlyBoundary)
                 .log();
     }
 
@@ -47,15 +47,15 @@ public class BusinessUnitGraphQlController {
             UnitGraphQlBoundary unit,
             @Argument int page,
             @Argument int size){
-        return this.businessUnitRestService
+        return this.businessUnitGraphQlService
                 .getUnits(unit.getId(),page,size)
-                .map(this::toGraphQlBoundray)
+                .map(this::toGraphBoundary)
                 .log();
 
     }
 
 
-    private EmployeeGraphQlBoundary toEmployeeGraphQlBoundray(EmployeeBoundary employeeBoundary) {
+    private EmployeeGraphQlBoundary toEmployeeGraphQlyBoundary(EmployeeBoundary employeeBoundary) {
         EmployeeGraphQlBoundary rv = new EmployeeGraphQlBoundary();
         rv.setEmail(employeeBoundary.getEmail());
         rv.setUnits(employeeBoundary.getUnits());
@@ -63,12 +63,12 @@ public class BusinessUnitGraphQlController {
     }
 
 
-    private UnitGraphQlBoundary toGraphQlBoundray(UnitBoundary unitBoundary) {
+    private UnitGraphQlBoundary toGraphBoundary(UnitBoundary unitBoundary) {
         UnitGraphQlBoundary rv = new UnitGraphQlBoundary();
         rv.setId(unitBoundary.getId());
         rv.setManager(unitBoundary.getManager());
         rv.setType(unitBoundary.getType());
-        rv.setParentUnit(unitBoundary.getParentUnit);
+        //rv.setParentUnit(unitBoundary.getParentUnit);
         rv.setCreationDate(this.formatter.format(unitBoundary.getCreationDate()));
         return rv;
     }
