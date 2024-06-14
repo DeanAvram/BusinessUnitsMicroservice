@@ -4,14 +4,14 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "BUSINESS_UNIT")
-public class BusinessUnitEntity {
+public class UnitEntity {
 
     @Id private String id;
     private String type;
     private String creationDate;
     private String manager;
 
-    public BusinessUnitEntity() {
+    public UnitEntity() {
     }
 
     public String getId() {

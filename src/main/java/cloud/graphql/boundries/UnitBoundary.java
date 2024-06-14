@@ -5,22 +5,28 @@ import java.util.Set;
 
 public class UnitBoundary {
 
-    private String Id;
+    private String id;
     private String type;
     private String creationDate;
-    private EmployeeBoundary manager;
-    private UnitBoundary parentUnit;
-    private Set<EmployeeBoundary> employees;
+    private String manager;
+    //private UnitBoundary parentUnit;
+    //private Set<EmployeeBoundary> employees;
 
     public UnitBoundary() {
     }
 
+    public UnitBoundary(String id, String type, String manager){
+        this.id = id;
+        this.type = type;
+        this.manager = manager;
+    }
+
     public String getId() {
-        return Id;
+        return id;
     }
 
     public void setId(String id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getType() {
@@ -39,15 +45,15 @@ public class UnitBoundary {
         this.creationDate = creationDate;
     }
 
-    public EmployeeBoundary getManager() {
+    public String getManager() {
         return manager;
     }
 
-    public void setManager(EmployeeBoundary manager) {
+    public void setManager(String manager) {
         this.manager = manager;
     }
 
-    public UnitBoundary getParentUnit() {
+    /*public UnitBoundary getParentUnit() {
         return parentUnit;
     }
 
@@ -61,5 +67,27 @@ public class UnitBoundary {
 
     public void setEmployees(Set<EmployeeBoundary> employees) {
         this.employees = employees;
+    }
+
+    @Override
+    public String toString() {
+        return "UnitBoundary{" +
+                "id='" + id + '\'' +
+                ", type='" + type + '\'' +
+                ", creationDate='" + creationDate + '\'' +
+                ", manager='" + manager + '\'' +
+                ", parentUnit=" + parentUnit +
+                ", employees=" + employees +
+                '}';
+    }*/
+
+    @Override
+    public String toString() {
+        return "UnitBoundary{" +
+                "id='" + id + '\'' +
+                ", type='" + type + '\'' +
+                ", creationDate='" + creationDate + '\'' +
+                ", manager='" + manager + '\'' +
+                '}';
     }
 }
