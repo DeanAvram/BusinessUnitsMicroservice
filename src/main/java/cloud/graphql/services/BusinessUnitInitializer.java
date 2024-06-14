@@ -18,6 +18,6 @@ public class BusinessUnitInitializer implements CommandLineRunner {
         //check if org is exist and create if not
         //this.businessUnitRestService.getOrgById("org")
         //        .switchIfEmpty(this.businessUnitRestService.createOrg(null, new UnitBoundary("org", "org", "ceo@demo.org")));
-        this.businessUnitRestService.createOrg(new UnitBoundary("org", "org", "test")).block();
+        this.businessUnitRestService.createOrg(new UnitBoundary("org", "org", "ceo@demo.org")).block();
     }
 }
