@@ -1,6 +1,5 @@
 package cloud.graphql.services;
 
-import cloud.graphql.boundries.EmployeeBoundary;
 import cloud.graphql.boundries.UnitBoundary;
 import cloud.graphql.entites.UnitEntity;
 import cloud.graphql.exception.BadRequestException;
@@ -24,7 +23,6 @@ public class BusinessUnitRestServiceImplementation implements BusinessUnitRestSe
     }
 
     public Mono<UnitBoundary> initOrg(UnitBoundary unitBoundary) {
-        unitBoundary.setCreationDate(formatter.format(LocalDate.now()));
         return Mono.just(unitBoundary)
                 .map(this::toEntity)
                 .flatMap(this.units::save)
@@ -33,7 +31,6 @@ public class BusinessUnitRestServiceImplementation implements BusinessUnitRestSe
 
 
     public Mono<UnitBoundary> createOrg(UnitBoundary unitBoundary, String parentUnitId) {
-        unitBoundary.setCreationDate(formatter.format(LocalDate.now()));
         return this.units.findById(unitBoundary.getId())
                 .hasElement().flatMap(
                         exist -> {
@@ -84,8 +81,10 @@ public class BusinessUnitRestServiceImplementation implements BusinessUnitRestSe
         UnitEntity rv = new UnitEntity();
         rv.setId(unitBoundary.getId());
         rv.setType(unitBoundary.getType());
+        if (unitBoundary.getManager().isEmpty())
+            throw new BadRequestException("Manager cannot be empty");
         rv.setManager(unitBoundary.getManager());
-        rv.setCreationDate(unitBoundary.getCreationDate());
+        rv.setCreationDate(formatter.format(LocalDate.now()));
         rv.setParentUnit(unitBoundary.getParentUnit());
         rv.setEmployees(unitBoundary.getEmployees());
         return rv;

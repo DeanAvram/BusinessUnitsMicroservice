@@ -1,8 +1,6 @@
 package cloud.graphql.services;
 
-import cloud.graphql.boundries.EmployeeBoundary;
 import cloud.graphql.boundries.UnitBoundary;
-import cloud.graphql.entites.UnitEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
