@@ -1,6 +1,7 @@
 package cloud.graphql.services;
 
 import cloud.graphql.boundries.EmployeeBoundary;
+import cloud.graphql.boundries.EmployeeGraphQlBoundary;
 import cloud.graphql.boundries.UnitBoundary;
 import cloud.graphql.entites.UnitEntity;
 import cloud.graphql.exception.BadRequestException;
@@ -91,9 +92,14 @@ public class BusinessUnitServiceImplementation implements BusinessUnitService {
                     rv.setEmail(employeeBoundary.getEmail());
                     return rv;
                 });
-        //System.out.println("id: " + id + " page: " + page + " size: " + size);
+    }
 
-                //.switchIfEmpty(Mono.error(new NotFoundException("Unit " + id + " not found")));
+    public Mono<EmployeeBoundary> getSpecifEmployee(String email){
+        return this.units.findAll()
+                .map(UnitEntity::getEmployees)
+                .flatMap(Flux::fromIterable)
+                .filter(employeeBoundary -> employeeBoundary.getEmail().equals(email))
+                .next();
     }
 
 

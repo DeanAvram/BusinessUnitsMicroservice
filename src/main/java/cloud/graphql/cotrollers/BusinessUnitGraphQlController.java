@@ -33,9 +33,10 @@ public class BusinessUnitGraphQlController {
     @QueryMapping
     public Mono<EmployeeGraphQlBoundary> getEmployeeByEmail(
             @Argument String email){
-        return null;
-        //return this.businessUnitService
-        //.getSpecifEmployee(email);
+
+        return this.businessUnitService
+                .getSpecifEmployee(email)
+                .map(this::toEmployeeGraphQlBoundary);
 
     }
 
