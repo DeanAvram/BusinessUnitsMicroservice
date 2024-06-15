@@ -1,6 +1,8 @@
 package cloud.graphql.services;
 
+import cloud.graphql.boundries.EmployeeBoundary;
 import cloud.graphql.boundries.UnitBoundary;
+import io.micrometer.observation.ObservationFilter;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
@@ -12,6 +14,7 @@ public interface BusinessUnitService {
 
     public Flux<UnitBoundary> gelAll();
     public Mono<UnitBoundary> getOrgById(String id);
-    public Flux<UnitBoundary> getSubUnits(String id, int size, int page);
+    public Flux<UnitBoundary> getSubUnits(String id, int page, int size);
 
+    public Flux<EmployeeBoundary> getEmployees(String id, int page, int size);
 }

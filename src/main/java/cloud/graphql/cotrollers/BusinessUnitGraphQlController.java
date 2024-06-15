@@ -1,5 +1,6 @@
 package cloud.graphql.cotrollers;
 
+import cloud.graphql.boundries.EmployeeBoundary;
 import cloud.graphql.boundries.EmployeeGraphQlBoundary;
 import cloud.graphql.boundries.UnitBoundary;
 import cloud.graphql.boundries.UnitGraphQlBoundary;
@@ -44,8 +45,19 @@ public class BusinessUnitGraphQlController {
             @Argument int page,
             @Argument int size){
         return this.businessUnitService
-                .getSubUnits(unit.getId(), size, page)
+                .getSubUnits(unit.getId(), page, size)
                 .map(this::toUnitGraphBoundary);
+    }
+
+    @SchemaMapping
+    public Flux<EmployeeGraphQlBoundary> employees(
+            UnitGraphQlBoundary unit,
+            @Argument int page,
+            @Argument int size){
+        return this.businessUnitService
+                .getEmployees(unit.getId(), page, size)
+                .map(this::toEmployeeGraphQlBoundary);
+
     }
 
 
@@ -59,6 +71,14 @@ public class BusinessUnitGraphQlController {
 
     }*/
 
+    private EmployeeGraphQlBoundary toEmployeeGraphQlBoundary(EmployeeBoundary employeeBoundary) {
+        EmployeeGraphQlBoundary rv = new EmployeeGraphQlBoundary();
+
+        rv.setEmail(employeeBoundary.getEmail());
+
+        return rv;
+    }
+
     private UnitGraphQlBoundary toUnitGraphBoundary(UnitBoundary unitBoundary) {
         UnitGraphQlBoundary rv = new UnitGraphQlBoundary();
 
@@ -66,6 +86,7 @@ public class BusinessUnitGraphQlController {
         rv.setType(unitBoundary.getType());
         rv.setManager(unitBoundary.getManager());
         rv.setCreationDate(unitBoundary.getCreationDate());
+        rv.setParentUnit(unitBoundary.getParentUnit());
 
         return rv;
     }

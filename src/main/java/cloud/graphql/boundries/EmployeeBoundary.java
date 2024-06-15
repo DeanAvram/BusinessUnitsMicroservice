@@ -5,10 +5,11 @@ import java.util.Set;
 public class EmployeeBoundary {
 
     private String email;
-    private Set<UnitBoundary> units;
+    //private Set<UnitBoundary> units;
 
     public EmployeeBoundary() {
     }
+
 
     public String getEmail() {
         return email;
@@ -18,12 +19,12 @@ public class EmployeeBoundary {
         this.email = email;
     }
 
-    public Set<UnitBoundary> getUnits() {
+    /*public Set<UnitBoundary> getUnits() {
         return units;
     }
 
     public void setUnits(Set<UnitBoundary> units) {
         this.units = units;
-    }
+    }*/
 
 }

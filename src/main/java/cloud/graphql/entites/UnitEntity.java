@@ -15,7 +15,7 @@ public class UnitEntity {
     private String creationDate;
     private String manager;
     private String parentUnit;
-    private Set<String> employees;
+    private Set<EmployeeBoundary> employees;
 
     public UnitEntity() {
     }
@@ -60,11 +60,23 @@ public class UnitEntity {
         this.parentUnit = parentUnit;
     }
 
-    public Set<String> getEmployees() {
+    public Set<EmployeeBoundary> getEmployees() {
         return employees;
     }
 
-    public void setEmployees(Set<String> employees) {
+    public void setEmployees(Set<EmployeeBoundary> employees) {
         this.employees = employees;
+    }
+
+    @Override
+    public String toString() {
+        return "UnitEntity{" +
+                "id='" + id + '\'' +
+                ", type='" + type + '\'' +
+                ", creationDate='" + creationDate + '\'' +
+                ", manager='" + manager + '\'' +
+                ", parentUnit='" + parentUnit + '\'' +
+                ", employees=" + employees +
+                '}';
     }
 }

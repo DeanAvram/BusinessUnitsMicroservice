@@ -1,6 +1,7 @@
 package cloud.graphql.boundries;
 
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class UnitBoundary {
@@ -10,12 +11,14 @@ public class UnitBoundary {
     private String creationDate;
     private String manager;
     private String parentUnit;
-    private Set<String> employees;
+    private Set<EmployeeBoundary> employees;
 
     public UnitBoundary() {
+        this.employees = new HashSet<>();
     }
 
     public UnitBoundary(String id, String type, String manager) {
+        this();
         this.id = id;
         this.type = type;
         this.manager = manager;
@@ -61,11 +64,11 @@ public class UnitBoundary {
         this.parentUnit = parentUnit;
     }
 
-    public Set<String> getEmployees() {
+    public Set<EmployeeBoundary> getEmployees() {
         return employees;
     }
 
-    public void setEmployees(Set<String> employees) {
+    public void setEmployees(Set<EmployeeBoundary> employees) {
         this.employees = employees;
     }
 

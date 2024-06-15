@@ -7,7 +7,7 @@ public class UnitGraphQlBoundary {
     private String type;
     private String creationDate;
     private String manager;
-    //private String parentUnit;
+    private String parentUnit;
 
     public UnitGraphQlBoundary() {
     }
@@ -44,11 +44,11 @@ public class UnitGraphQlBoundary {
         this.manager = manager;
     }
 
-    /*public UnitGraphQlBoundary getParentUnit() {
+    public String getParentUnit() {
         return parentUnit;
     }
 
-    public void setParentUnit(UnitGraphQlBoundary parentUnit) {
+    public void setParentUnit(String parentUnit) {
         this.parentUnit = parentUnit;
-    }*/
+    }
 }

@@ -11,11 +11,9 @@ type UnitGraphQlBoundary{
     manager: String
     employees(page:Int, size:Int):[EmployeeGraphQlBoundary]
     subUnits(page:Int, size:Int):[UnitGraphQlBoundary]
-    parentUnit: UnitGraphQlBoundary
+    parentUnit: String
 }
 
 type EmployeeGraphQlBoundary{
     email:String
-    units: UnitGraphQlBoundary
-    manages: UnitGraphQlBoundary
 }

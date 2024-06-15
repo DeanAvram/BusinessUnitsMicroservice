@@ -1,15 +1,18 @@
 package cloud.graphql.services;
 
+import cloud.graphql.boundries.EmployeeBoundary;
 import cloud.graphql.boundries.UnitBoundary;
 import cloud.graphql.entites.UnitEntity;
 import cloud.graphql.exception.BadRequestException;
 import cloud.graphql.exception.NotFoundException;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Set;
 
 @Service
 public class BusinessUnitServiceImplementation implements BusinessUnitService {
@@ -71,9 +74,26 @@ public class BusinessUnitServiceImplementation implements BusinessUnitService {
     }
 
     @Override
-    public Flux<UnitBoundary> getSubUnits(String id, int size, int page) {
-        return this.units.findAllByParentUnit(id)
+    public Flux<UnitBoundary> getSubUnits(String id, int page, int size) {
+        return this.units.findAllByParentUnit(id, PageRequest.of(page, size))
                 .map(this::toBoundary);
+    }
+
+    @Override
+    public Flux<EmployeeBoundary> getEmployees(String id, int page, int size) {
+        return this.units.findById(id)
+                .map(UnitEntity::getEmployees)
+                .flatMapMany(Flux::fromIterable)
+                .skip(page * size)
+                .take(size)
+                .map(employeeBoundary -> {
+                    EmployeeBoundary rv = new EmployeeBoundary();
+                    rv.setEmail(employeeBoundary.getEmail());
+                    return rv;
+                });
+        //System.out.println("id: " + id + " page: " + page + " size: " + size);
+
+                //.switchIfEmpty(Mono.error(new NotFoundException("Unit " + id + " not found")));
     }
 
 
