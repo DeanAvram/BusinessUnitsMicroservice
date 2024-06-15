@@ -3,6 +3,8 @@ package cloud.graphql.services;
 import cloud.graphql.boundries.EmployeeBoundary;
 import cloud.graphql.boundries.UnitBoundary;
 import cloud.graphql.entites.UnitEntity;
+import cloud.graphql.exception.BadRequestException;
+import cloud.graphql.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
@@ -21,30 +23,42 @@ public class BusinessUnitRestServiceImplementation implements BusinessUnitRestSe
         this.units = units;
     }
 
-
-    public Mono<UnitBoundary> createOrg(UnitBoundary unitBoundary, String parentUnitId) {
+    public Mono<UnitBoundary> initOrg(UnitBoundary unitBoundary) {
         unitBoundary.setCreationDate(formatter.format(LocalDate.now()));
-
-        Mono<UnitEntity> entityMono = (parentUnitId == null || parentUnitId.isEmpty())
-                ? Mono.just(unitBoundary).map(this::toEntity)
-                : this.units.findById(parentUnitId)
-                .map(parentUnit -> {
-                    unitBoundary.setParentUnit(parentUnit.getId());
-                    return this.toEntity(unitBoundary);
-                });
-
-        return entityMono
+        return Mono.just(unitBoundary)
+                .map(this::toEntity)
                 .flatMap(this.units::save)
                 .map(this::toBoundary);
     }
 
 
+    public Mono<UnitBoundary> createOrg(UnitBoundary unitBoundary, String parentUnitId) {
+        unitBoundary.setCreationDate(formatter.format(LocalDate.now()));
+        return this.units.findById(unitBoundary.getId())
+                .hasElement().flatMap(
+                        exist -> {
+                            if (exist)
+                                return Mono.error(new BadRequestException("Unit " + unitBoundary.getId() + " already exists"));
+                            else
+                                return this.units.findById(parentUnitId)
+                                        .switchIfEmpty(Mono.error(new NotFoundException("Parent unit " + parentUnitId + " not found")))
+                                        .map(parentUnit -> {
+                                            unitBoundary.setParentUnit(parentUnit.getId());
+                                            return this.toEntity(unitBoundary);
+                                        })
+                                        .flatMap(entity -> this.units.save(entity).map(this::toBoundary));
+                        }
+
+                );
+    }
+
+
     @Override
     public Mono<Void> cleanup() {
-        return units.findByIdNot("org")
-                .flatMap(units::delete)
-                .then();
-        //return units.deleteAll();
+        //return units.findByIdNot("org")
+        //       .flatMap(units::delete)
+        //      .then();
+        return units.deleteAll();
     }
 
     @Override

@@ -8,6 +8,7 @@ import reactor.core.publisher.Flux;
 
 public interface BusinessUnitRestService {
 
+    public Mono<UnitBoundary> initOrg(UnitBoundary unitBoundary);
     public Mono<UnitBoundary> createOrg(UnitBoundary unitBoundary, String parentUnitId);
     public Mono<Void> cleanup();
 
