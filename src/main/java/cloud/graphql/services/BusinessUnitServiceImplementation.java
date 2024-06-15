@@ -12,13 +12,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @Service
-public class BusinessUnitRestServiceImplementation implements BusinessUnitRestService {
+public class BusinessUnitServiceImplementation implements BusinessUnitService {
 
     private BusinessUnitCrud units;
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
 
-    public BusinessUnitRestServiceImplementation(BusinessUnitCrud units) {
+    public BusinessUnitServiceImplementation(BusinessUnitCrud units) {
         this.units = units;
     }
 
@@ -61,6 +61,18 @@ public class BusinessUnitRestServiceImplementation implements BusinessUnitRestSe
     @Override
     public Flux<UnitBoundary> gelAll() {
         return units.findAll()
+                .map(this::toBoundary);
+    }
+
+    public Mono<UnitBoundary> getOrgById(String id){
+        return this.units.findById(id)
+                .map(this::toBoundary)
+                .switchIfEmpty(Mono.error(new NotFoundException("Unit " + id + " not found")));
+    }
+
+    @Override
+    public Flux<UnitBoundary> getSubUnits(String id, int size, int page) {
+        return this.units.findAllByParentUnit(id)
                 .map(this::toBoundary);
     }
 

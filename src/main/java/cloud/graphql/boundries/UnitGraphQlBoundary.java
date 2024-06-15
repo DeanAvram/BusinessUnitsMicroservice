@@ -6,8 +6,8 @@ public class UnitGraphQlBoundary {
     private String Id;
     private String type;
     private String creationDate;
-    private EmployeeBoundary manager;
-    private UnitGraphQlBoundary parentUnit;
+    private String manager;
+    //private String parentUnit;
 
     public UnitGraphQlBoundary() {
     }
@@ -36,19 +36,19 @@ public class UnitGraphQlBoundary {
         this.creationDate = creationDate;
     }
 
-    public EmployeeBoundary getManager() {
+    public String getManager() {
         return manager;
     }
 
-    public void setManager(EmployeeBoundary manager) {
+    public void setManager(String manager) {
         this.manager = manager;
     }
 
-    public UnitGraphQlBoundary getParentUnit() {
+    /*public UnitGraphQlBoundary getParentUnit() {
         return parentUnit;
     }
 
     public void setParentUnit(UnitGraphQlBoundary parentUnit) {
         this.parentUnit = parentUnit;
-    }
+    }*/
 }

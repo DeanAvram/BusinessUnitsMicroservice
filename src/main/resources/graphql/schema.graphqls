@@ -6,9 +6,9 @@ type Query {
 
 type UnitGraphQlBoundary{
     id:ID
-    name:String
+    type:String
     createdTimestamp:String
-    manager: EmployeeGraphQlBoundary
+    manager: String
     employees(page:Int, size:Int):[EmployeeGraphQlBoundary]
     subUnits(page:Int, size:Int):[UnitGraphQlBoundary]
     parentUnit: UnitGraphQlBoundary

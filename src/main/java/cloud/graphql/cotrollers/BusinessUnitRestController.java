@@ -1,7 +1,7 @@
 package cloud.graphql.cotrollers;
 
 import cloud.graphql.boundries.UnitBoundary;
-import cloud.graphql.services.BusinessUnitRestService;
+import cloud.graphql.services.BusinessUnitService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
@@ -12,9 +12,9 @@ import reactor.core.publisher.Mono;
 public class BusinessUnitRestController {
 
 
-    private BusinessUnitRestService businessUnitService;
+    private BusinessUnitService businessUnitService;
 
-    public BusinessUnitRestController(BusinessUnitRestService businessUnitService) {
+    public BusinessUnitRestController(BusinessUnitService businessUnitService) {
         this.businessUnitService = businessUnitService;
     }
 

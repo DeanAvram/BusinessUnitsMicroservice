@@ -4,13 +4,14 @@ import cloud.graphql.boundries.UnitBoundary;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-public interface BusinessUnitRestService {
+public interface BusinessUnitService {
 
     public Mono<UnitBoundary> initOrg(UnitBoundary unitBoundary);
     public Mono<UnitBoundary> createOrg(UnitBoundary unitBoundary, String parentUnitId);
     public Mono<Void> cleanup();
 
     public Flux<UnitBoundary> gelAll();
-    //public Mono<UnitBoundary> getOrgById(String id);
+    public Mono<UnitBoundary> getOrgById(String id);
+    public Flux<UnitBoundary> getSubUnits(String id, int size, int page);
 
 }

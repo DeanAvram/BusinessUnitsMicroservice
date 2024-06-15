@@ -1,8 +1,9 @@
 package cloud.graphql.cotrollers;
 
 import cloud.graphql.boundries.EmployeeGraphQlBoundary;
+import cloud.graphql.boundries.UnitBoundary;
 import cloud.graphql.boundries.UnitGraphQlBoundary;
-import cloud.graphql.services.BusinessUnitGraphQlService;
+import cloud.graphql.services.BusinessUnitService;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
@@ -14,26 +15,39 @@ import reactor.core.publisher.Mono;
 @Controller
 public class BusinessUnitGraphQlController {
 
-    private BusinessUnitGraphQlService businessUnitGraphQlService;
+    private BusinessUnitService businessUnitService;
 
-    public BusinessUnitGraphQlController(BusinessUnitGraphQlService businessUnitGraphQlService) {
-        this.businessUnitGraphQlService = businessUnitGraphQlService;
+    public BusinessUnitGraphQlController(BusinessUnitService businessUnitService) {
+        this.businessUnitService = businessUnitService;
     }
 
     @QueryMapping
     public Mono<UnitGraphQlBoundary> getUnitById(
             @Argument String id){
-        return this.businessUnitGraphQlService
-                .getSpecificUnit(id);
+        return this.businessUnitService
+                .getOrgById(id)
+                .map(this::toUnitGraphBoundary);
     }
 
     @QueryMapping
     public Mono<EmployeeGraphQlBoundary> getEmployeeByEmail(
             @Argument String email){
-        return this.businessUnitGraphQlService
-                .getSpecifEmployee(email);
+        return null;
+        //return this.businessUnitService
+        //.getSpecifEmployee(email);
 
     }
+
+    @SchemaMapping
+    public Flux<UnitGraphQlBoundary> subUnits (
+            UnitGraphQlBoundary unit,
+            @Argument int page,
+            @Argument int size){
+        return this.businessUnitService
+                .getSubUnits(unit.getId(), size, page)
+                .map(this::toUnitGraphBoundary);
+    }
+
 
     /*@SchemaMapping
     public Flux<UnitGraphQlBoundary> getAllUnits(
@@ -44,6 +58,17 @@ public class BusinessUnitGraphQlController {
 
 
     }*/
+
+    private UnitGraphQlBoundary toUnitGraphBoundary(UnitBoundary unitBoundary) {
+        UnitGraphQlBoundary rv = new UnitGraphQlBoundary();
+
+        rv.setId(unitBoundary.getId());
+        rv.setType(unitBoundary.getType());
+        rv.setManager(unitBoundary.getManager());
+        rv.setCreationDate(unitBoundary.getCreationDate());
+
+        return rv;
+    }
 
 
 

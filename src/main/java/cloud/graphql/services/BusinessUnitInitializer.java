@@ -7,9 +7,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class BusinessUnitInitializer implements CommandLineRunner {
 
-    private BusinessUnitRestService businessUnitRestService;
+    private BusinessUnitService businessUnitRestService;
 
-    public BusinessUnitInitializer(BusinessUnitRestService businessUnitRestService) {
+    public BusinessUnitInitializer(BusinessUnitService businessUnitRestService) {
         this.businessUnitRestService = businessUnitRestService;
     }
 
