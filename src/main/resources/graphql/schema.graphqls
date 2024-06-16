@@ -16,4 +16,5 @@ type UnitGraphQlBoundary{
 
 type EmployeeGraphQlBoundary{
     email:String
+    units(page:Int, size:Int):[UnitGraphQlBoundary]
 }

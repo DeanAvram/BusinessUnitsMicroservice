@@ -20,4 +20,6 @@ public interface BusinessUnitService {
     public Flux<EmployeeBoundary> getEmployees(String id, int page, int size);
 
     public Mono<EmployeeBoundary> getSpecifEmployee(String email);
+
+    public Flux<UnitBoundary> getUnits(String email, int page, int size);
 }
