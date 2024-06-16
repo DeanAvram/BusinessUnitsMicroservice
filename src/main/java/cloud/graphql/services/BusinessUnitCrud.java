@@ -12,4 +12,5 @@ public interface BusinessUnitCrud extends ReactiveMongoRepository<UnitEntity, St
         public Flux<UnitEntity> findByIdNot (@Param("id") String id, Pageable pageable);
         public Flux<UnitEntity> findAllByParentUnit(@Param("parentUnit") String parentUnit, Pageable pageable);
         public Flux<UnitEntity> findAllByEmployees_Email(@Param("email") String email, Pageable pageable);
+        public Flux<UnitEntity> findAllByManager(@Param("manager") String email, Pageable pageable);
 }

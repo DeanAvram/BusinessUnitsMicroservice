@@ -68,7 +68,17 @@ public class BusinessUnitGraphQlController {
             @Argument int page,
             @Argument int size){
         return this.businessUnitService
-                .getUnits(employee.getEmail(), page, size)
+                .getUnitsOfEmployee(employee.getEmail(), page, size)
+                .map(this::toUnitGraphBoundary);
+    }
+
+    @SchemaMapping
+    public Flux<UnitGraphQlBoundary> manages(
+            EmployeeGraphQlBoundary employee,
+            @Argument int page,
+            @Argument int size){
+        return this.businessUnitService
+                .getUnitsOfManager(employee.getEmail(), page, size)
                 .map(this::toUnitGraphBoundary);
     }
 

@@ -102,8 +102,13 @@ public class BusinessUnitServiceImplementation implements BusinessUnitService {
                 .next();
     }
 
-    public Flux<UnitBoundary> getUnits(String email, int page, int size){
+    public Flux<UnitBoundary> getUnitsOfEmployee(String email, int page, int size){
         return this.units.findAllByEmployees_Email(email, PageRequest.of(page, size))
+                .map(this::toBoundary);
+    }
+
+    public Flux<UnitBoundary> getUnitsOfManager(String email, int page, int size){
+        return this.units.findAllByManager(email, PageRequest.of(page, size))
                 .map(this::toBoundary);
     }
 
