@@ -31,6 +31,5 @@ public class BusinessUnitInitializer implements CommandLineRunner {
         this.businessUnitRestService.createOrg(new UnitBoundary("Post_Sale", "Post_Sale",  "manager@support.demo.org"), "Support").block();
         this.businessUnitRestService.createOrg(new UnitBoundary("Finance", "Finance",  "manager@fin.demo.org"), "org").block();
         this.businessUnitRestService.createOrg(new UnitBoundary("HR", "HR",  "manager@hr.demo.org"), "org").block();
-
     }
 }

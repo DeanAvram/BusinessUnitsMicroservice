@@ -86,12 +86,7 @@ public class BusinessUnitServiceImplementation implements BusinessUnitService {
                 .map(UnitEntity::getEmployees)
                 .flatMapMany(Flux::fromIterable)
                 .skip(page * size)
-                .take(size)
-                .map(employeeBoundary -> {
-                    EmployeeBoundary rv = new EmployeeBoundary();
-                    rv.setEmail(employeeBoundary.getEmail());
-                    return rv;
-                });
+                .take(size);
     }
 
     public Mono<EmployeeBoundary> getSpecifEmployee(String email){
