@@ -5,6 +5,7 @@ type Query {
 }
 
 type Mutation {
+    addEmployee(unitId:ID, email:String):EmployeeGraphQlBoundary
     addUnit(parentUnitId:ID, newUnitId: ID, newUnitType:String, managerEmail:String):UnitGraphQlBoundary
 }
 

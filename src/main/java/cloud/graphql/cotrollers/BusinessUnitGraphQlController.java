@@ -95,6 +95,17 @@ public class BusinessUnitGraphQlController {
                 .map(this::toUnitGraphBoundary);
     }
 
+    @MutationMapping
+    public Mono<EmployeeGraphQlBoundary> addEmployee(
+            @Argument String unitId,
+            @Argument String email){
+        EmployeeBoundary boundary = new EmployeeBoundary();
+        boundary.setEmail(email);
+        return this.businessUnitService
+                .addEmployeeToUnit(unitId, boundary)
+                .map(this::toEmployeeGraphQlBoundary);
+    }
+
 
     /*@SchemaMapping
     public Flux<UnitGraphQlBoundary> getAllUnits(

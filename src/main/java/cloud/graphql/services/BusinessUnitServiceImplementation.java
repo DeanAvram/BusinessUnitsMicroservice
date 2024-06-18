@@ -107,6 +107,23 @@ public class BusinessUnitServiceImplementation implements BusinessUnitService {
                 .map(this::toBoundary);
     }
 
+    public Mono<EmployeeBoundary> addEmployeeToUnit(String unitId, EmployeeBoundary employeeBoundary){
+        this.units.findById(unitId)
+                .map(unitEntity -> {
+                    Set<EmployeeBoundary> employees = unitEntity.getEmployees();
+                    System.out.println(employees.size());
+                    employees.add(employeeBoundary);
+                    unitEntity.setEmployees(employees);
+                    System.out.println(employees.size());
+                    return unitEntity;
+                })
+                .flatMap(this.units::save);
+        return Mono.just(employeeBoundary);
+
+
+
+    }
+
 
     private UnitBoundary toBoundary(UnitEntity unitEntity) {
         UnitBoundary rv = new UnitBoundary();

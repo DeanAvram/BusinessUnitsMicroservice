@@ -23,4 +23,6 @@ public interface BusinessUnitService {
 
     public Flux<UnitBoundary> getUnitsOfEmployee(String email, int page, int size);
     public Flux<UnitBoundary> getUnitsOfManager(String email, int page, int size);
+
+    public Mono<EmployeeBoundary> addEmployeeToUnit(String unitId, EmployeeBoundary employeeBoundary);
 }
