@@ -1,11 +1,9 @@
 package cloud.graphql.cotrollers;
 
-import cloud.graphql.boundries.EmployeeBoundary;
-import cloud.graphql.boundries.EmployeeGraphQlBoundary;
-import cloud.graphql.boundries.UnitBoundary;
-import cloud.graphql.boundries.UnitGraphQlBoundary;
+import cloud.graphql.boundries.*;
 import cloud.graphql.services.BusinessUnitService;
 import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
@@ -82,6 +80,21 @@ public class BusinessUnitGraphQlController {
                 .map(this::toUnitGraphBoundary);
     }
 
+    @MutationMapping
+    public Mono<UnitGraphQlBoundary> addUnit(
+            @Argument String parentUnitId,
+            @Argument String newUnitId,
+            @Argument String newUnitType,
+            @Argument String managerEmail){
+        UnitBoundary boundary = new UnitBoundary();
+        boundary.setId(newUnitId);
+        boundary.setType(newUnitType);
+        boundary.setManager(managerEmail);
+        return this.businessUnitService
+                .createOrg(boundary, parentUnitId)
+                .map(this::toUnitGraphBoundary);
+    }
+
 
     /*@SchemaMapping
     public Flux<UnitGraphQlBoundary> getAllUnits(
@@ -109,6 +122,18 @@ public class BusinessUnitGraphQlController {
         rv.setManager(unitBoundary.getManager());
         rv.setCreationDate(unitBoundary.getCreationDate());
         rv.setParentUnit(unitBoundary.getParentUnit());
+
+        return rv;
+    }
+
+    private UnitBoundary toUnitBoundary (UnitGraphQlBoundary unitGraphQlBoundary){
+        UnitBoundary rv = new UnitBoundary();
+
+        rv.setId(unitGraphQlBoundary.getId());
+        rv.setType(unitGraphQlBoundary.getType());
+        rv.setManager(unitGraphQlBoundary.getManager());
+        rv.setCreationDate(unitGraphQlBoundary.getCreationDate());
+        rv.setParentUnit(unitGraphQlBoundary.getParentUnit());
 
         return rv;
     }

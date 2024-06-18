@@ -3,7 +3,7 @@ package cloud.graphql.boundries;
 
 public class UnitGraphQlBoundary {
 
-    private String Id;
+    private String id;
     private String type;
     private String creationDate;
     private String manager;
@@ -13,11 +13,11 @@ public class UnitGraphQlBoundary {
     }
 
     public String getId() {
-        return Id;
+        return id;
     }
 
     public void setId(String id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getType() {
