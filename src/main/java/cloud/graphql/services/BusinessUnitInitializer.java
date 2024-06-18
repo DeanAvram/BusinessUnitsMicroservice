@@ -21,8 +21,8 @@ public class BusinessUnitInitializer implements CommandLineRunner {
         this.businessUnitRestService.cleanup().block();
         this.businessUnitRestService.initOrg(new UnitBoundary("org", "org",  "ceo@demo.org")).block();
         this.businessUnitRestService.createOrg(new UnitBoundary("Core_Division", "Core_Division",  "manager@rnd.demo.org"), "org").block();
-        this.businessUnitRestService.createOrg(new UnitBoundary("Cloud_Team ", "Cloud_Team",  "team.leader@rnd.demo.org"), "Core_Division").block();
-        this.businessUnitRestService.createOrg(new UnitBoundary("DevOps_Team ", "DevOps_Team ",  "team.leader@devops.demo.org"), "Core_Division").block();
+        this.businessUnitRestService.createOrg(new UnitBoundary("Cloud_Team", "Cloud_Team",  "team.leader@rnd.demo.org"), "Core_Division").block();
+        this.businessUnitRestService.createOrg(new UnitBoundary("DevOps_Team", "DevOps_Team",  "team.leader@devops.demo.org"), "Core_Division").block();
         this.businessUnitRestService.createOrg(new UnitBoundary("Logistics", "Logistics",  "manager@logistics.demo.org"), "org").block();
         this.businessUnitRestService.createOrg(new UnitBoundary("Marketing", "Marketing",  "manager@marteting.demo.org"), "org").block();
         this.businessUnitRestService.createOrg(new UnitBoundary("Sales", "Sales",  "manager@sales.demo.org"), "org").block();
