@@ -14,6 +14,7 @@ import reactor.core.publisher.Flux;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 @Service
 public class BusinessUnitServiceImplementation implements BusinessUnitService {
@@ -143,11 +144,23 @@ public class BusinessUnitServiceImplementation implements BusinessUnitService {
         rv.setType(unitBoundary.getType());
         if (unitBoundary.getManager().isEmpty())
             throw new BadRequestException("Manager cannot be empty");
+        if (!isValidEmail(unitBoundary.getManager()))
+            throw new BadRequestException("Invalid email format.");
         rv.setManager(unitBoundary.getManager());
         rv.setCreationDate(formatter.format(LocalDate.now()));
         rv.setParentUnit(unitBoundary.getParentUnit());
+        for(EmployeeBoundary employeeBoundary : unitBoundary.getEmployees()){
+            if (!isValidEmail(employeeBoundary.getEmail()))
+                throw new BadRequestException("Invalid email format.");
         rv.setEmployees(unitBoundary.getEmployees());
+        }
         return rv;
+    }
+
+    private boolean isValidEmail(String email) {
+        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}(\\.[A-Za-z]{2,})?$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        return email != null && pattern.matcher(email).matches();
     }
 
 
