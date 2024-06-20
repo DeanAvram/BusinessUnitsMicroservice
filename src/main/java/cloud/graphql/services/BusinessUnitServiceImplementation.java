@@ -57,10 +57,10 @@ public class BusinessUnitServiceImplementation implements BusinessUnitService {
 
     @Override
     public Mono<Void> cleanup() {
-        //return units.findByIdNot("org")
-        //       .flatMap(units::delete)
-        //      .then();
-        return units.deleteAll();
+        return units.findByIdNot("org")
+               .flatMap(units::delete)
+              .then();
+        //return units.deleteAll();
     }
 
     @Override
