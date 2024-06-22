@@ -126,7 +126,7 @@ public class BusinessUnitServiceImplementation implements BusinessUnitService {
         rv.setId(unitEntity.getId());
         rv.setType(unitEntity.getType());
         rv.setManager(unitEntity.getManager());
-        rv.setCreationDate(unitEntity.getCreationDate());
+        rv.setCreatedDate(unitEntity.getCreationDate());
         rv.setParentUnit(unitEntity.getParentUnit());
         rv.setEmployees(unitEntity.getEmployees());
         return rv;

@@ -8,7 +8,7 @@ public class UnitBoundary {
 
     private String id;
     private String type;
-    private String creationDate;
+    private String createdDate;
     private String manager;
     private String parentUnit;
     private Set<EmployeeBoundary> employees;
@@ -40,12 +40,12 @@ public class UnitBoundary {
         this.type = type;
     }
 
-    public String getCreationDate() {
-        return creationDate;
+    public String getCreatedDate() {
+        return createdDate;
     }
 
-    public void setCreationDate(String creationDate) {
-        this.creationDate = creationDate;
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
     }
 
     public String getManager() {
@@ -71,5 +71,4 @@ public class UnitBoundary {
     public void setEmployees(Set<EmployeeBoundary> employees) {
         this.employees = employees;
     }
-
 }

@@ -121,7 +121,7 @@ public class BusinessUnitGraphQlController {
         rv.setId(unitBoundary.getId());
         rv.setType(unitBoundary.getType());
         rv.setManager(unitBoundary.getManager());
-        rv.setCreationDate(unitBoundary.getCreationDate());
+        rv.setCreatedDate(unitBoundary.getCreatedDate());
         rv.setParentUnit(unitBoundary.getParentUnit());
 
         return rv;

@@ -5,7 +5,7 @@ public class UnitGraphQlBoundary {
 
     private String id;
     private String type;
-    private String creationDate;
+    private String createdDate;
     private String manager;
     private String parentUnit;
 
@@ -28,12 +28,12 @@ public class UnitGraphQlBoundary {
         this.type = type;
     }
 
-    public String getCreationDate() {
-        return creationDate;
+    public String getCreatedDate() {
+        return createdDate;
     }
 
-    public void setCreationDate(String creationDate) {
-        this.creationDate = creationDate;
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
     }
 
     public String getManager() {
@@ -51,4 +51,5 @@ public class UnitGraphQlBoundary {
     public void setParentUnit(String parentUnit) {
         this.parentUnit = parentUnit;
     }
+
 }
