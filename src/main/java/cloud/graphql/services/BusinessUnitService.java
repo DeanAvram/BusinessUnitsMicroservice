@@ -14,6 +14,7 @@ public interface BusinessUnitService {
     public Mono<Void> cleanup();
 
     public Flux<UnitBoundary> gelAll();
+    public Flux<UnitBoundary> getAllPageSize(int page, int size);
     public Mono<UnitBoundary> getOrgById(String id);
     public Flux<UnitBoundary> getSubUnits(String id, int page, int size);
 

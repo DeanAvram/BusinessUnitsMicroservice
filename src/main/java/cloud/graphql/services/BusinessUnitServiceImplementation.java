@@ -69,6 +69,14 @@ public class BusinessUnitServiceImplementation implements BusinessUnitService {
                 .map(this::toBoundary);
     }
 
+    @Override
+    public Flux<UnitBoundary> getAllPageSize(int page, int size){
+        return units.findAll()
+                .skip(page * size)
+                .take(size)
+                .map(this::toBoundary);
+    }
+
     public Mono<UnitBoundary> getOrgById(String id){
         return this.units.findById(id)
                 .map(this::toBoundary)

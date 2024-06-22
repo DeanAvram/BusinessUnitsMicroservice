@@ -1,7 +1,9 @@
 package cloud.graphql.cotrollers;
 
 import cloud.graphql.boundries.*;
+import cloud.graphql.services.BusinessUnitCrud;
 import cloud.graphql.services.BusinessUnitService;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
@@ -37,6 +39,16 @@ public class BusinessUnitGraphQlController {
                 .map(this::toEmployeeGraphQlBoundary);
 
     }
+
+    @QueryMapping
+    public Flux<UnitGraphQlBoundary> allUnits(
+            @Argument int page,
+            @Argument int size){
+        return this.businessUnitService
+                .getAllPageSize(page, size)
+                .map(this::toUnitGraphBoundary);
+    }
+
 
     @SchemaMapping
     public Flux<UnitGraphQlBoundary> subUnits (
