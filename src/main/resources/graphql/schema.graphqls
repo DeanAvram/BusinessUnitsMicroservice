@@ -1,7 +1,7 @@
 type Query {
-    getUnitById (id:ID):UnitGraphQlBoundary
-    getEmployeeByEmail (email:String):EmployeeGraphQlBoundary
-    getUnits (page:Int, size:Int):[UnitGraphQlBoundary]
+    unit (id:ID):UnitGraphQlBoundary
+    employee (email:String):EmployeeGraphQlBoundary
+    allUnits (page:Int, size:Int):[UnitGraphQlBoundary]
 }
 
 type Mutation {
@@ -12,7 +12,7 @@ type Mutation {
 type UnitGraphQlBoundary{
     id:ID
     type:String
-    createdTimestamp:String
+    createdDate:String
     manager: String
     employees(page:Int, size:Int):[EmployeeGraphQlBoundary]
     subUnits(page:Int, size:Int):[UnitGraphQlBoundary]

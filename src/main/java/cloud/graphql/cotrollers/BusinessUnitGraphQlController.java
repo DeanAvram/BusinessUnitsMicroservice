@@ -21,7 +21,7 @@ public class BusinessUnitGraphQlController {
     }
 
     @QueryMapping
-    public Mono<UnitGraphQlBoundary> getUnitById(
+    public Mono<UnitGraphQlBoundary> unit(
             @Argument String id){
         return this.businessUnitService
                 .getOrgById(id)
@@ -29,7 +29,7 @@ public class BusinessUnitGraphQlController {
     }
 
     @QueryMapping
-    public Mono<EmployeeGraphQlBoundary> getEmployeeByEmail(
+    public Mono<EmployeeGraphQlBoundary> employee(
             @Argument String email){
 
         return this.businessUnitService
@@ -107,16 +107,6 @@ public class BusinessUnitGraphQlController {
     }
 
 
-    /*@SchemaMapping
-    public Flux<UnitGraphQlBoundary> getAllUnits(
-            @Argument int page,
-            @Argument int size){
-        return this.businessUnitGraphQlService
-                .getAllUnits(page,size);
-
-
-    }*/
-
     private EmployeeGraphQlBoundary toEmployeeGraphQlBoundary(EmployeeBoundary employeeBoundary) {
         EmployeeGraphQlBoundary rv = new EmployeeGraphQlBoundary();
 
@@ -136,19 +126,6 @@ public class BusinessUnitGraphQlController {
 
         return rv;
     }
-
-    private UnitBoundary toUnitBoundary (UnitGraphQlBoundary unitGraphQlBoundary){
-        UnitBoundary rv = new UnitBoundary();
-
-        rv.setId(unitGraphQlBoundary.getId());
-        rv.setType(unitGraphQlBoundary.getType());
-        rv.setManager(unitGraphQlBoundary.getManager());
-        rv.setCreationDate(unitGraphQlBoundary.getCreationDate());
-        rv.setParentUnit(unitGraphQlBoundary.getParentUnit());
-
-        return rv;
-    }
-
 
 
 }

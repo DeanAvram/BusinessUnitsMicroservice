@@ -35,6 +35,8 @@ public class BusinessUnitServiceImplementation implements BusinessUnitService {
 
 
     public Mono<UnitBoundary> createOrg(UnitBoundary unitBoundary, String parentUnitId) {
+        if(unitBoundary.getId() == null || unitBoundary.getId().isBlank())
+            throw new BadRequestException("must fill id");
         return this.units.findById(unitBoundary.getId())
                 .hasElement().flatMap(
                         exist -> {
@@ -59,7 +61,6 @@ public class BusinessUnitServiceImplementation implements BusinessUnitService {
         return units.findByIdNot("org")
                .flatMap(units::delete)
               .then();
-        //return units.deleteAll();
     }
 
     @Override

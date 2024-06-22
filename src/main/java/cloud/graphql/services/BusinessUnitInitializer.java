@@ -14,10 +14,7 @@ public class BusinessUnitInitializer implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
-        //check if org is exist and create if not
-        //this.businessUnitRestService.getOrgById("org")
-        //        .switchIfEmpty(this.businessUnitRestService.createOrg(null, new UnitBoundary("org", "org", "ceo@demo.org")));
+    public void run(String... args){
         this.businessUnitRestService.cleanup().block();
         this.businessUnitRestService.initOrg(new UnitBoundary("org", "org",  "ceo@demo.org")).block();
         this.businessUnitRestService.createOrg(new UnitBoundary("Core_Division", "Core_Division",  "manager@rnd.demo.org"), "org").block();
