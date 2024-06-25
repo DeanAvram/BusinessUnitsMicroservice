@@ -6,6 +6,7 @@ import cloud.graphql.entites.UnitEntity;
 import cloud.graphql.exception.BadRequestException;
 import cloud.graphql.exception.NotFoundException;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
@@ -71,11 +72,18 @@ public class BusinessUnitServiceImplementation implements BusinessUnitService {
 
     @Override
     public Flux<UnitBoundary> getAllPageSize(int page, int size){
-        return units.findAll()
-                .skip(page * size)
-                .take(size)
+        return units.findAllByIdNotNull(PageRequest.of(page, size, Sort.Direction.ASC,  "name", "id"))
                 .map(this::toBoundary);
     }
+    /*
+     public Flux<DummyBoundary> getPage(int size, int page) {
+        return this.dummyCrud
+            .findAllByIdNotNull(PageRequest.of(page, size, Sort.Direction.ASC, "createdTimestamp", "name", "id"))
+            .map(this::toBoundary)
+            .log();
+    }
+
+     */
 
     public Mono<UnitBoundary> getOrgById(String id){
         return this.units.findById(id)
