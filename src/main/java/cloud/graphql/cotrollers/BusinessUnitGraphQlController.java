@@ -45,7 +45,7 @@ public class BusinessUnitGraphQlController {
             @Argument int page,
             @Argument int size){
         return this.businessUnitService
-                .getAllPageSize(page, size)
+                .getAllUnitsPageSize(page, size)
                 .map(this::toUnitGraphBoundary);
     }
 

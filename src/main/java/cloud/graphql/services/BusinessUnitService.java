@@ -13,8 +13,8 @@ public interface BusinessUnitService {
     public Mono<UnitBoundary> createOrg(UnitBoundary unitBoundary, String parentUnitId);
     public Mono<Void> cleanup();
 
-    public Flux<UnitBoundary> gelAll();
-    public Flux<UnitBoundary> getAllPageSize(int page, int size);
+    public Flux<UnitBoundary> gelAllUnits();
+    public Flux<UnitBoundary> getAllUnitsPageSize(int page, int size);
     public Mono<UnitBoundary> getOrgById(String id);
     public Flux<UnitBoundary> getSubUnits(String id, int page, int size);
 

@@ -22,7 +22,7 @@ public class BusinessUnitRestController {
             produces = {MediaType.TEXT_EVENT_STREAM_VALUE}
     )
     public Flux<UnitBoundary> getAllUnits(){
-        return this.businessUnitService.gelAll();
+        return this.businessUnitService.gelAllUnits();
     }
 
     @PostMapping(

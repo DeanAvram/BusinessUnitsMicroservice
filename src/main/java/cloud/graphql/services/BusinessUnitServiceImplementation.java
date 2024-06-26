@@ -65,25 +65,16 @@ public class BusinessUnitServiceImplementation implements BusinessUnitService {
     }
 
     @Override
-    public Flux<UnitBoundary> gelAll() {
+    public Flux<UnitBoundary> gelAllUnits() {
         return units.findAll()
                 .map(this::toBoundary);
     }
 
     @Override
-    public Flux<UnitBoundary> getAllPageSize(int page, int size){
+    public Flux<UnitBoundary> getAllUnitsPageSize(int page, int size){
         return units.findAllByIdNotNull(PageRequest.of(page, size, Sort.Direction.ASC,  "name", "id"))
                 .map(this::toBoundary);
     }
-    /*
-     public Flux<DummyBoundary> getPage(int size, int page) {
-        return this.dummyCrud
-            .findAllByIdNotNull(PageRequest.of(page, size, Sort.Direction.ASC, "createdTimestamp", "name", "id"))
-            .map(this::toBoundary)
-            .log();
-    }
-
-     */
 
     public Mono<UnitBoundary> getOrgById(String id){
         return this.units.findById(id)
